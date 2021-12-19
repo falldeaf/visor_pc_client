@@ -1,0 +1,20 @@
+{
+  "name": "visor_pc_client",
+  "version": "1.0.0",
+  "description": "Visor PC Client",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "falldeaf",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^16.0.4"
+  },
+  "dependencies": {
+    "cross-fetch": "^3.1.4",
+    "dotenv": "^10.0.0",
+    "pngjs": "^6.0.0"
+  }
+}

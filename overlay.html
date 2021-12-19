@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Hello World!</title>
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			background-color: purple;
+			width:300px;
+			height:80px;
+		}
+
+		#progress {
+			float:left;
+			width:100px;
+			height:80px;
+		}
+
+		#settings {
+			float:right;
+			height:80px;
+			width: 200px;
+			background-color: royalblue;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="progress">
+
+	</canvas>
+
+	<div id="settings">
+		wl:32.5k BA:1600 tk:9000 fr:20
+	</div>
+
+	<script>
+		var canvas = document.getElementById('progress')
+		var context = canvas.getContext('2d')
+		canvas.style.background = "red"
+		console.log("blah");
+	</script>
+</body>
+</html>
