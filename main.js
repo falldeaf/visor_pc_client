@@ -112,7 +112,7 @@ const popupWindow = () => {
 		const { width, height } = primaryDisplay.workAreaSize
 		let swidth = width
 		let sheight = height
-		let wwidth = 300
+		let wwidth = 400
 		let wheight = 700
 
 		popwin = new BrowserWindow({
