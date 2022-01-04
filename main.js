@@ -7,6 +7,7 @@ const { app, Menu, Tray, BrowserWindow, Notification, clipboard, ipcMain, webCon
 const nativeImage = require('electron').nativeImage
 const execute = require('child_process').exec;
 
+const platform = process.platform;
 const deviceid = process.env.DEVICEID;
 const apikey = process.env.APIKEY;
 let updating = true;
@@ -34,7 +35,7 @@ setInterval(async ()=>{
 		if(current_color != color_data.hex) {
 			console.log("New color has been set: " + color_data.hex);
 			current_color = color_data.hex;
-			setWindowsAccentColor(color_data.hex);
+			if(platform === "win32") setWindowsAccentColor(color_data.hex);
 			//setQKeyboardColor(color_data.hex);
 		}
 	}
@@ -144,7 +145,7 @@ app.whenReady().then(() => {
 	const contextMenu = createMenu();
 	tray.setToolTip('Visor status application')
 	tray.setContextMenu(contextMenu)
-	tray.on('click', popupWindow);
+	tray.on('right-click', popupWindow);
 })
 
 function createMenu() {
@@ -157,6 +158,10 @@ function createMenu() {
 				//console.log("Clicked on settings");
 				//setProgressIcon([{progress: 50, hex:"00ff00"},{progress: 80, hex:"ff0000"},{progress: 100, hex:"0000ff"},{progress: 20, hex:"0f00ff"},{progress: 10, hex:"0f0fff"},{progress: 20, hex:"0f00ff"},{progress: 100, hex:"ff0dfc"}]);
 			}
+		},
+		{
+			label: 'Popup',
+			click: popupWindow
 		},
 		{
 			label: 'Exit',
