@@ -6,6 +6,7 @@ const png = require("pngjs").PNG;
 const { app, Menu, Tray, BrowserWindow, Notification, clipboard, ipcMain, webContents } = require('electron')
 const nativeImage = require('electron').nativeImage
 const execute = require('child_process').exec;
+const yaru = require('./yaru_colors');
 
 const platform = process.platform;
 const deviceid = process.env.DEVICEID;
@@ -36,6 +37,7 @@ setInterval(async ()=>{
 			console.log("New color has been set: " + color_data.hex);
 			current_color = color_data.hex;
 			if(platform === "win32") setWindowsAccentColor(color_data.hex);
+			if(platform === "linux") setLinuxAccentColor(color_data.hex);
 			//setQKeyboardColor(color_data.hex);
 		}
 	}
@@ -242,6 +244,13 @@ function convertRange(value) {
 
 function setWindowsAccentColor(hexcolor) {
 	execute("wcolor.exe -accent_color " + hexcolor, (err, stdout)=>{});
+}
+
+function setLinuxAccentColor(hexcolor) {
+	const theme_name = yaru.matchColor(hexcolor);
+	execute(`gsettings set org.gnome.desktop.interface icon-theme '${theme_name}'`, (err, stdout)=>{});
+	execute(`gsettings set org.gnome.desktop.interface gtk-theme '${theme_name}-dark'`, (err, stdout)=>{});
+	execute(`gsettings set org.gnome.desktop.interface cursor-theme '${theme_name}'`, (err, stdout)=>{});
 }
 
 async function setQKeyboardColor(hexcolor) {
