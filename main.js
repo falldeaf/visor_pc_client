@@ -148,7 +148,7 @@ app.whenReady().then(() => {
 	const contextMenu = createMenu();
 	tray.setToolTip('Visor status application')
 	tray.setContextMenu(contextMenu)
-	tray.on('right-click', popupWindow);
+	tray.on('click', popupWindow);
 })
 
 function createMenu() {
