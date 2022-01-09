@@ -33,12 +33,13 @@ setInterval(async ()=>{
 		if(popwin) popwin.webContents.send('settings', settings_data);
 
 		const color_data = settings_data.find((setting) => setting.name == "primary_color");
-		if(current_color != color_data.hex) {
-			console.log("New color has been set: " + color_data.hex);
-			current_color = color_data.hex;
-			if(platform === "win32") setWindowsAccentColor(color_data.hex);
-			if(platform === "linux") setLinuxAccentColor(color_data.hex);
-			//setQKeyboardColor(color_data.hex);
+		if(current_color != color_data.value) {
+			new_color = color_data.value
+			console.log("New color has been set: " + new_color);
+			current_color = new_color;
+			if(platform === "win32") setWindowsAccentColor(new_color);
+			if(platform === "linux") setLinuxAccentColor(new_color);
+			//setQKeyboardColor(new_color);
 		}
 	}
 	catch (e) {
