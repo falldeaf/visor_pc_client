@@ -31,10 +31,10 @@ setInterval(async ()=>{
 		if(popwin) popwin.webContents.send('settings', settings_data);
 
 		const color_data = settings_data.find((setting) => setting.name == "primary_color");
-		if(current_color != color_data.hex) {
-			console.log("New color has been set: " + color_data.hex);
-			current_color = color_data.hex;
-			setWindowsAccentColor(color_data.hex);
+		if(current_color != color_data.value) {
+			console.log("New color has been set: " + color_data.value);
+			current_color = color_data.value;
+			setWindowsAccentColor(color_data.value);
 			//setQKeyboardColor(color_data.hex);
 		}
 	}
