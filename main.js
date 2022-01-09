@@ -6,9 +6,7 @@ const png = require("pngjs").PNG;
 const { app, Menu, Tray, BrowserWindow, Notification, clipboard, ipcMain, webContents } = require('electron')
 const nativeImage = require('electron').nativeImage
 const execute = require('child_process').exec;
-const yaru = require('./yaru_colors');
 
-const platform = process.platform;
 const deviceid = process.env.DEVICEID;
 const apikey = process.env.APIKEY;
 let updating = true;
@@ -148,7 +146,7 @@ app.whenReady().then(() => {
 	const contextMenu = createMenu();
 	tray.setToolTip('Visor status application')
 	tray.setContextMenu(contextMenu)
-	tray.on('right-click', popupWindow);
+	tray.on('click', popupWindow);
 })
 
 function createMenu() {
@@ -161,10 +159,6 @@ function createMenu() {
 				//console.log("Clicked on settings");
 				//setProgressIcon([{progress: 50, hex:"00ff00"},{progress: 80, hex:"ff0000"},{progress: 100, hex:"0000ff"},{progress: 20, hex:"0f00ff"},{progress: 10, hex:"0f0fff"},{progress: 20, hex:"0f00ff"},{progress: 100, hex:"ff0dfc"}]);
 			}
-		},
-		{
-			label: 'Popup',
-			click: popupWindow
 		},
 		{
 			label: 'Exit',
@@ -245,13 +239,6 @@ function convertRange(value) {
 
 function setWindowsAccentColor(hexcolor) {
 	execute("wcolor.exe -accent_color " + hexcolor, (err, stdout)=>{});
-}
-
-function setLinuxAccentColor(hexcolor) {
-	const theme_name = yaru.matchColor(hexcolor);
-	execute(`gsettings set org.gnome.desktop.interface icon-theme '${theme_name}'`, (err, stdout)=>{});
-	execute(`gsettings set org.gnome.desktop.interface gtk-theme '${theme_name}-dark'`, (err, stdout)=>{});
-	execute(`gsettings set org.gnome.desktop.interface cursor-theme '${theme_name}'`, (err, stdout)=>{});
 }
 
 async function setQKeyboardColor(hexcolor) {
